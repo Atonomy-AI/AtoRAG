@@ -1,0 +1,92 @@
+{
+  "dxt_version": "0.1",
+  "name": "AtoRAG",
+  "displayName": "AtoRAG Universal Knowledge Base",
+  "description": "Universal Knowledge Base with RAG capabilities and automatic conversation memory. Store and search any type of content with semantic search.",
+  "version": "0.1.0",
+  "author": {
+    "name": "AtonomyAI",
+    "url": "https://github.com/Atonomy-AI/AtoRAG"
+  },
+  "homepage": "https://github.com/Atonomy-AI/AtoRAG",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Atonomy-AI/AtoRAG"
+  },
+  "updateUrl": "https://github.com/Atonomy-AI/AtoRAG/releases/latest/download/AtoRAG.dxt",
+  "autoUpdate": true,
+  "command": {
+    "type": "node",
+    "script": "${__dirname}/server/index.js"
+  },
+  "capabilities": {
+    "tools": true
+  },
+  "permissions": {
+    "filesystem": {
+      "read": true,
+      "write": true
+    }
+  },
+  "display_name": "AtoRAG",
+  "long_description": "AtoRAG by AtonomyAI - Transform any content into a searchable knowledge base. Store documents, CSV data, policies, research papers, meeting notes, or any text through natural conversation. Uses advanced text processing and vector search for intelligent retrieval.",
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/index.js"],
+      "env": {
+        "ATORAG_BACKUP_PATH": "${user_config.backup_path}"
+      }
+    }
+  },
+  "user_config": {
+    "backup_path": {
+      "type": "string",
+      "title": "Backup Directory Path",
+      "description": "Custom directory path for storing backups (optional). If not set, backups will be stored in ~/.atorag/backups/. Recommended: Use a path outside the extension directory to preserve backups when uninstalling.",
+      "sensitive": false,
+      "required": false
+    }
+  },
+  "tools": [
+    {
+      "name": "store_document",
+      "description": "Store any document, text, or data in the knowledge base with automatic processing and tagging"
+    },
+
+    {
+      "name": "smart_search",
+      "description": "Search the knowledge base using natural language with advanced filtering and ranking"
+    },
+    {
+      "name": "list_documents",
+      "description": "Browse all stored documents with filtering by type, date, or tags"
+    },
+    {
+      "name": "get_document",
+      "description": "Retrieve full details of a specific document by ID"
+    },
+    {
+      "name": "delete_document",
+      "description": "Remove a document from the knowledge base"
+    },
+    {
+      "name": "analyze_content",
+      "description": "Analyze content before storing to show summary, topics, and suggested tags"
+    },
+    {
+      "name": "manage_partitions",
+      "description": "Create, list, or delete knowledge base partitions for organizing different types of content"
+    },
+    {
+      "name": "manage_collections",
+      "description": "Create, view, or modify document collections and categories"
+    },
+    {
+      "name": "backup_restore",
+      "description": "Create backups, restore from backups, or list available backups of your knowledge base"
+    }
+  ]
+} 

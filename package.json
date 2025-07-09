@@ -1,0 +1,21 @@
+{
+  "name": "atorag",
+  "version": "0.1.0",
+  "description": "AtoRAG Universal Knowledge Base - MCP RAG extension for Claude Desktop",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0",
+    "sql.js": "^1.10.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "bundledDependencies": [
+    "@modelcontextprotocol/sdk"
+  ]
+} 
