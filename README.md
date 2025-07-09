@@ -29,7 +29,7 @@ AtoRAG is a completely self-contained desktop extension by AtonomyAI that turns 
 - **Smart Summaries**: Generates concise summaries
 - **Collections**: Organize related documents together
 
-### 💻 **Zero Dependencies RAG Stack**
+### 💻 **Zero Dependencies**
 - **Self-Contained**: Complete RAG system with no Python, no external installations
 - **Built-in Embeddings**: Uses @xenova/transformers for all-MiniLM-L6-v2 embeddings
 - **SQLite Vector Database**: Efficient local vector storage with semantic search
@@ -64,7 +64,7 @@ AtoRAG is a completely self-contained desktop extension by AtonomyAI that turns 
 ### Installation
 
 #### Option 1: Download Pre-built Extension
-1. Download the [latest release](https://github.com/Atonomy-AI/AtoRAG/releases/latest) for a pre-built `.dxt` file that can be uploaded directly to Claude Desktop.
+1. Download the [latest release](https://github.com/Atonomy-AI/AtoRAG/releases/latest/download/AtoRAG.dxt) for a pre-built `.dxt` file that can be uploaded directly to Claude Desktop.
 
 #### Option 2: Build from Source
 1. **Clone the repository**:
@@ -291,7 +291,7 @@ Show me all available backups
 
 **Restore from Backup:**
 ```
-Restore from this backup: /path/to/backup/atorag-backup-2024-01-15T10-30-45-123Z.json
+Restore from the most recent backup
 ```
 
 **Custom Backup Location:**
@@ -376,13 +376,6 @@ MIT License - Open source and free to use, modify, and distribute.
 
 We welcome contributions! This is designed to be a universal knowledge management solution for everyone.
 
-### Ideas for Enhancement
-- **Multi-format Support**: PDF, Word, PowerPoint parsing
-- **Advanced Analytics**: Content insights and trends
-- **Export Features**: Backup and migration tools
-- **Collaboration**: Shared knowledge bases
-- **Integration**: Connect with other tools and services
-
 ## 🆘 Support
 
 Having issues? Check these common solutions:
@@ -391,6 +384,7 @@ Having issues? Check these common solutions:
 2. **Search not working**: Check if documents are stored
 3. **Import failing**: Verify CSV format
 4. **Performance issues**: Large documents may take time to process
+5. **Other Issues**: [Submit an issue on GitHub](https://github.com/Atonomy-AI/AtoRAG/issues)
 
 ## 🌟 Why AtoRAG?
 
