@@ -28,50 +28,14 @@ print_warning() {
 
 # Check if version argument is provided
 if [ $# -eq 0 ]; then
-    print_error "❌ Usage: $0 <version|patch|minor|major>"
-    print_error "   Examples: $0 1.0.0"
-    print_error "             $0 patch"
-    print_error "             $0 minor"
-    print_error "             $0 major"
+    print_error "❌ Usage: $0 <version>"
+    print_error "   Example: $0 0.1.0"
     exit 1
 fi
 
-VERSION_INPUT=$1
-
-# Get current version from manifest.json
-CURRENT_VERSION=$(grep '"version"' manifest.json | head -1 | sed 's/.*"version": "\([^"]*\)".*/\1/')
-
-# Calculate new version based on input
-if [[ $VERSION_INPUT =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-    # Direct version specified
-    NEW_VERSION=$VERSION_INPUT
-elif [[ $VERSION_INPUT == "patch" || $VERSION_INPUT == "minor" || $VERSION_INPUT == "major" ]]; then
-    # Calculate new version from current
-    IFS='.' read -r major minor patch <<< "$CURRENT_VERSION"
-    
-    case $VERSION_INPUT in
-        "major")
-            major=$((major + 1))
-            minor=0
-            patch=0
-            ;;
-        "minor")
-            minor=$((minor + 1))
-            patch=0
-            ;;
-        "patch")
-            patch=$((patch + 1))
-            ;;
-    esac
-    
-    NEW_VERSION="$major.$minor.$patch"
-else
-    print_error "❌ Invalid input. Use semantic versioning (e.g., 1.0.0) or keywords (patch, minor, major)"
-    exit 1
-fi
+NEW_VERSION=$1
 
 print_status "🚀 Creating AtoRAG release v$NEW_VERSION"
-print_status "📋 Current version: $CURRENT_VERSION → New version: $NEW_VERSION"
 
 # Check if gh is authenticated
 print_status "🔑 Checking GitHub CLI authentication..."
@@ -99,46 +63,15 @@ if gh release view "v$NEW_VERSION" >/dev/null 2>&1; then
     gh release delete "v$NEW_VERSION" --yes || true
 fi
 
-# Update version in package.json
-print_status "📝 Updating package.json version to $NEW_VERSION..."
-sed -i '' "s/\"version\": \"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" package.json
-
-# Update version in manifest.json
-print_status "📝 Updating manifest.json version to $NEW_VERSION..."
-sed -i '' "s/\"version\": \"[^\"]*\"/\"version\": \"$NEW_VERSION\"/" manifest.json
-
-print_success "✅ Updated version to $NEW_VERSION"
-
-# Validate the manifest first
-print_status "🔍 Validating DXT manifest..."
-if ! dxt validate manifest.json; then
-    print_error "❌ Manifest validation failed!"
-    exit 1
-fi
-
-# Build the extension using official DXT toolchain
-print_status "📦 Building extension with DXT toolchain..."
-if ! dxt pack . AtoRAG.dxt; then
-    print_error "❌ DXT build failed!"
-    exit 1
-fi
-print_success "✅ Extension built successfully"
-
 # Check if AtoRAG.dxt exists
 if [ ! -f "./AtoRAG.dxt" ]; then
-    print_error "❌ AtoRAG.dxt not found after build!"
+    print_error "❌ AtoRAG.dxt not found! Build it first."
     exit 1
 fi
-
-# Commit all changes (version updates + package-lock.json changes from build)
-print_status "📝 Committing all changes..."
-git add .
-git commit -m "Release v$NEW_VERSION"
 
 # Create and push tag
 print_status "🏷️ Creating and pushing tag..."
 git tag -a "v$NEW_VERSION" -m "Release v$NEW_VERSION"
-git push origin main
 git push origin "v$NEW_VERSION"
 
 # Create the release
@@ -170,5 +103,4 @@ gh release create "v$NEW_VERSION" ./AtoRAG.dxt \
 - All data stored locally in ~/.atorag/knowledge_base/"
 
 print_success "🎉 Release v$NEW_VERSION created successfully!"
-print_success "📋 Check the release at: https://github.com/Atonomy-AI/AtoRAG/releases/tag/v$NEW_VERSION"
-print_success "🔄 Auto-updates are now enabled for users!" 
+print_success "📋 Check the release at: https://github.com/Atonomy-AI/AtoRAG/releases/tag/v$NEW_VERSION" 
