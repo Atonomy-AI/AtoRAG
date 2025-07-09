@@ -167,10 +167,7 @@ gh release create "v$NEW_VERSION" ./AtoRAG.dxt \
 - Package size: 8.8MB
 - Zero external dependencies
 - Uses Claude Desktop's built-in Node.js runtime
-- All data stored locally in ~/.atorag/knowledge_base/
-
-### 🔄 Auto-Updates
-This extension supports automatic updates. Once installed, Claude Desktop will automatically check for and install new versions."
+- All data stored locally in ~/.atorag/knowledge_base/"
 
 print_success "🎉 Release v$NEW_VERSION created successfully!"
 print_success "📋 Check the release at: https://github.com/Atonomy-AI/AtoRAG/releases/tag/v$NEW_VERSION"
