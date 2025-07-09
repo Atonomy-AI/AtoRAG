@@ -3,7 +3,7 @@
   "name": "AtoRAG",
   "displayName": "AtoRAG Universal Knowledge Base",
   "description": "Universal Knowledge Base with RAG capabilities and automatic conversation memory. Store and search any type of content with semantic search.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": {
     "name": "AtonomyAI",
     "url": "https://github.com/Atonomy-AI/AtoRAG"
@@ -52,13 +52,12 @@
   },
   "tools": [
     {
-      "name": "store_document",
-      "description": "Store any document, text, or data in the knowledge base with automatic processing and tagging"
+      "name": "add_document",
+      "description": "Add a new document to the knowledge base with automatic analysis"
     },
-
     {
-      "name": "smart_search",
-      "description": "Search the knowledge base using natural language with advanced filtering and ranking"
+      "name": "search_documents",
+      "description": "Search for documents using semantic similarity"
     },
     {
       "name": "list_documents",
@@ -66,27 +65,27 @@
     },
     {
       "name": "get_document",
-      "description": "Retrieve full details of a specific document by ID"
+      "description": "Retrieve a specific document by ID"
     },
     {
       "name": "delete_document",
-      "description": "Remove a document from the knowledge base"
+      "description": "Delete a document from the knowledge base"
     },
     {
       "name": "analyze_content",
-      "description": "Analyze content before storing to show summary, topics, and suggested tags"
+      "description": "Analyze content for readability, key phrases, and insights"
     },
     {
       "name": "manage_partitions",
-      "description": "Create, list, or delete knowledge base partitions for organizing different types of content"
+      "description": "Create, list, or delete partitions for organizing documents"
     },
     {
       "name": "manage_collections",
-      "description": "Create, view, or modify document collections and categories"
+      "description": "Create collections and manage document groupings"
     },
     {
       "name": "backup_restore",
-      "description": "Create backups, restore from backups, or list available backups of your knowledge base"
+      "description": "Create backups, restore from backups, or list available backups"
     }
   ]
 } 

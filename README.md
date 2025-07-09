@@ -1,9 +1,9 @@
-# 🚀 AtoRAG - Universal Knowledge Base Extension
+# 🚀 AtoRAG - Universal RAG Knowledge Base Extension
 *by AtonomyAI*
 
-**Transform any content into a searchable knowledge base through Claude Desktop**
+**Transform any content into a searchable RAG (Retrieval-Augmented Generation) knowledge base through Claude Desktop**
 
-AtoRAG is a completely self-contained desktop extension by AtonomyAI that turns Claude Desktop into a powerful knowledge management system. Store documents, CSV data, policies, research papers, meeting notes, or any text content, then search and retrieve it using natural language.
+AtoRAG is a completely self-contained desktop extension by AtonomyAI that turns Claude Desktop into a powerful RAG-enabled knowledge management system. Store documents, CSV data, policies, research papers, meeting notes, or any text content, then search and retrieve it using natural language with advanced semantic search and vector embeddings.
 
 ## ✨ Key Features
 
@@ -15,11 +15,13 @@ AtoRAG is a completely self-contained desktop extension by AtonomyAI that turns 
 - **Research**: Studies, reports, analysis documents
 - **Contracts**: Agreements, invoices, legal documents
 
-### 🔍 **Intelligent Search**
-- **Natural Language**: Search using everyday language
-- **Smart Filtering**: Filter by type, tags, date ranges
+### 🔍 **RAG-Powered Intelligent Search**
+- **Natural Language**: Search using everyday language queries
+- **Vector Embeddings**: Uses all-MiniLM-L6-v2 transformer model for semantic understanding
+- **Semantic Search**: Finds contextually relevant content, not just keyword matches
+- **Smart Filtering**: Filter by type, tags, date ranges, and partitions
 - **Advanced Scoring**: Multiple relevance factors for better results
-- **Vector Similarity**: Custom text embeddings for semantic search
+- **Retrieval-Augmented Generation**: Perfect for feeding Claude with relevant context
 
 ### 🏷️ **Automatic Organization**
 - **Auto-tagging**: Extracts meaningful tags from content
@@ -27,17 +29,19 @@ AtoRAG is a completely self-contained desktop extension by AtonomyAI that turns 
 - **Smart Summaries**: Generates concise summaries
 - **Collections**: Organize related documents together
 
-### 💻 **Zero Dependencies**
-- **Self-Contained**: No Python, no external installations
+### 💻 **Zero Dependencies RAG Stack**
+- **Self-Contained**: Complete RAG system with no Python, no external installations
+- **Built-in Embeddings**: Uses @xenova/transformers for all-MiniLM-L6-v2 embeddings
+- **SQLite Vector Database**: Efficient local vector storage with semantic search
 - **Built-in Node.js**: Uses Claude Desktop's runtime
-- **Local Storage**: All data stays on your machine
-- **Drag & Drop**: Install with a single .dxt file
+- **Local Storage**: All data and embeddings stay on your machine
+- **Drag & Drop**: Install complete RAG system with a single .dxt file
 
-### 🏢 **Enterprise Solutions**
-- **Shared Corporate Knowledge Bases**: PostgreSQL-powered RAG servers
-- **Multi-User Access**: Role-based permissions and audit trails
-- **Centralized Management**: All employees access same knowledge base
-- **Custom Integrations**: SSO, API development, etc.
+### 🏢 **Enterprise RAG Solutions**
+- **Shared Corporate Knowledge Bases**: PostgreSQL-powered RAG servers with advanced embeddings
+- **Multi-User RAG Access**: Role-based permissions and audit trails for knowledge retrieval
+- **Centralized RAG Management**: All employees access same vector-indexed knowledge base
+- **Custom RAG Integrations**: SSO, API development, custom embedding models, etc.
 
 **Enterprise Architecture:**
 ```
@@ -59,7 +63,10 @@ AtoRAG is a completely self-contained desktop extension by AtonomyAI that turns 
 
 ### Installation
 
-#### Option 1: Build from Source (Recommended)
+#### Option 1: Download Pre-built Extension
+1. Download the [latest release](https://github.com/Atonomy-AI/AtoRAG/releases/latest) for a pre-built `.dxt` file that can be uploaded directly to Claude Desktop.
+
+#### Option 2: Build from Source
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/Atonomy-AI/AtoRAG.git
@@ -68,7 +75,7 @@ AtoRAG is a completely self-contained desktop extension by AtonomyAI that turns 
 
 2. **Build the extension**:
    ```bash
-   ./build.sh
+   ./scripts/build.sh
    ```
 
 3. **Install in Claude Desktop**:
@@ -80,9 +87,6 @@ AtoRAG is a completely self-contained desktop extension by AtonomyAI that turns 
 4. **Optional**: Configure backup directory path (recommended)
 5. **Start using**: The extension is now available in your Claude conversations!
 
-#### Option 2: Download Pre-built Extension
-Check the [Releases](https://github.com/Atonomy-AI/AtoRAG/releases) page for pre-built `.dxt` files (when available).
-
 ### ⚙️ Configuration
 
 #### Backup Directory Path (Recommended)
@@ -93,44 +97,78 @@ To preserve your backups when uninstalling the extension, set a custom backup pa
    - **macOS/Linux**: `~/Documents/AtoRAG-Backups/`
    - **Windows**: `C:\Users\YourName\Documents\AtoRAG-Backups\`
 
-**Example Claude Desktop configuration:**
-```json
-{
-  "mcpServers": {
-    "atorag": {
-      "command": "node",
-      "args": ["path/to/server/index.js"],
-      "env": {
-        "ATORAG_BACKUP_PATH": "/Users/yourname/Documents/AtoRAG-Backups"
-      }
-    }
-  }
-}
-```
-
 If not configured, backups will be stored in `~/.atorag/backups/` (may be lost when uninstalling).
 
 ### Basic Usage
 
-**Store a document:**
+**Store documents (multiple ways):**
 ```
-Store this policy document: [paste your content]
-```
+# Upload files directly in Claude Desktop, then:
+Save these uploaded documents to AtoRAG
 
-**Import CSV data:**
-```
+# Or paste content:
+Store this policy document: [paste your content]
+
+# Or import CSV data:
 Import this CSV file: [paste CSV content]
 ```
 
 **Search your knowledge base:**
 ```
 Find all documents about data privacy
+Search for information about budget planning
+What do we have on customer feedback?
 ```
 
 **Browse by type:**
 ```
 Show me all policy documents
+List all meeting notes from this month
 ```
+
+## 🤖 What is RAG (Retrieval-Augmented Generation)?
+
+**RAG** combines the power of information retrieval with AI generation to provide more accurate, contextual responses. Instead of relying solely on the AI's training data, RAG systems:
+
+1. **📚 Store Knowledge**: Documents are processed and stored with semantic embeddings
+2. **🔍 Retrieve Relevant Info**: When you ask a question, the system finds the most relevant stored content
+3. **🧠 Generate Responses**: AI uses the retrieved information to provide accurate, up-to-date answers
+
+### 🎯 How AtoRAG Implements RAG
+
+**AtoRAG transforms Claude Desktop into a complete RAG system:**
+
+```
+Your Question → Vector Search → Retrieved Context → Claude + Context → Enhanced Answer
+```
+
+**Example RAG Flow:**
+1. **Store**: "Our company policy states employees can work remotely 3 days per week"
+2. **Ask**: "What's our remote work policy?"
+3. **Retrieve**: AtoRAG finds the relevant policy document using semantic search
+4. **Generate**: Claude uses the retrieved policy text to give you an accurate answer
+
+### 🔧 RAG Technical Implementation
+
+- **🧮 Embeddings**: Uses all-MiniLM-L6-v2 transformer model (384-dimensional vectors)
+- **🗄️ Vector Database**: SQLite with efficient vector storage and cosine similarity search
+- **✂️ Chunking**: Automatically splits large documents into searchable chunks
+- **🔍 Semantic Search**: Finds contextually relevant content, not just keyword matches
+- **⚡ Real-time**: Instant retrieval and context injection into Claude conversations
+
+### 🎨 RAG Use Cases
+
+**📊 Business Intelligence RAG:**
+- Store quarterly reports, then ask "What were our key challenges last quarter?"
+- Upload meeting minutes, then ask "What decisions were made about the budget?"
+
+**🔬 Research RAG:**
+- Store research papers, then ask "What are the latest findings on AI safety?"
+- Upload documentation, then ask "How do I implement this API?"
+
+**📚 Knowledge Management RAG:**
+- Store company policies, then ask "What's our vacation policy?"
+- Upload manuals, then ask "How do I troubleshoot this error?"
 
 ## 🛠️ Available Tools
 
@@ -190,25 +228,23 @@ Backup and restore your knowledge base
 
 ### Storing Different Content Types
 
-**Company Policy:**
+**Upload Multiple Files:**
 ```
-Store this document:
-Title: "Data Privacy Policy"
-Content: "This policy outlines how we handle customer data..."
+# Upload PDFs, Word docs, text files, etc. in Claude Desktop, then:
+Save all these uploaded documents to AtoRAG with type "policy"
 ```
 
-**Meeting Minutes:**
+**Paste Content:**
 ```
 Store this meeting note:
 Title: "Q4 Planning Meeting - Dec 2024"
 Content: "Attendees: John, Sarah, Mike. Agenda: Budget review..."
 ```
 
-**Research Paper:**
+**Batch Processing:**
 ```
-Store this research:
-Title: "AI in Healthcare - Literature Review"
-Content: "Abstract: This paper examines the current state..."
+# Upload multiple research papers, then:
+Save these research papers to AtoRAG in the "research" partition
 ```
 
 ### Smart Searching
@@ -263,19 +299,20 @@ Restore from this backup: /path/to/backup/atorag-backup-2024-01-15T10-30-45-123Z
 Create a backup in my custom directory: /Users/myname/Documents/MyBackups/
 ```
 
-## 🏗️ Technical Architecture
+## 🏗️ RAG Technical Architecture
 
-### Advanced Text Processing
-- **Multi-hash Embeddings**: Sophisticated text vectorization
-- **Semantic Similarity**: Custom cosine similarity scoring
-- **Content Analysis**: Automatic type detection and tagging
-- **Smart Summarization**: Intelligent content summarization
+### Advanced RAG Processing Pipeline
+- **🧮 Transformer Embeddings**: Uses all-MiniLM-L6-v2 model for 384-dimensional semantic vectors
+- **✂️ Intelligent Chunking**: Automatically splits documents into optimal chunks for retrieval
+- **🔍 Vector Search**: Cosine similarity search across embedded document chunks
+- **📊 Semantic Scoring**: Multi-factor relevance scoring for accurate retrieval
+- **🏷️ Content Analysis**: Automatic type detection and tagging for better organization
 
-### Local Storage
-- **JSON Database**: Simple, fast, and reliable
-- **Home Directory**: `~/.atorag/knowledge_base/`
-- **Automatic Backups**: Data persistence across sessions
-- **Privacy First**: All data stays local
+### Local RAG Storage
+- **🗄️ SQLite Vector Database**: Efficient vector storage with semantic search capabilities
+- **🏠 Home Directory**: `~/.atorag/` - All embeddings and data stored locally
+- **💾 Automatic Backups**: Complete RAG system backup and restore
+- **🔒 Privacy First**: All embeddings and data stay on your machine - no cloud dependencies
 
 ### Document Types
 - `document` - General documents
@@ -326,18 +363,10 @@ Create a backup in my custom directory: /Users/myname/Documents/MyBackups/
 ### Building from Source
 ```bash
 npm install
-npm run build
+./scripts/build.sh
 ```
 
-### Creating Extension
-```bash
-./build.sh
-```
-
-### Self-Contained Build
-```bash
-./build_selfcontained.sh
-```
+The `build.sh` script handles everything - it installs dependencies, builds the extension, and creates the `.dxt` file in the root directory.
 
 ## 📜 License
 
