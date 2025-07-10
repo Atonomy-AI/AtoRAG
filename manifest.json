@@ -3,7 +3,7 @@
   "name": "AtoRAG",
   "displayName": "AtoRAG Universal Knowledge Base",
   "description": "Universal Knowledge Base with RAG capabilities and automatic conversation memory. Store and search any type of content with semantic search.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": {
     "name": "AtonomyAI",
     "url": "https://github.com/Atonomy-AI/AtoRAG"

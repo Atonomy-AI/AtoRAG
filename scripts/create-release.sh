@@ -80,14 +80,11 @@ gh release create "v$NEW_VERSION" ./AtoRAG.dxt \
     --title "AtoRAG v$NEW_VERSION" \
     --notes "## AtoRAG v$NEW_VERSION
 
-### 🌟 Features
-- 📄 Store any documents, policies, research papers
-- 🔍 Semantic search with natural language  
-- 🏷️ Auto-tagging and content analysis
-- 📁 Organize with collections and partitions
-- 💾 Configurable backup system with restore points
-- 🔍 Vector-based similarity search
-- 📊 Content analysis and summarization
+### 🚀 What's New in This Release
+- ✅ **Fixed Similarity Bug**: Enhanced search now uses TF-IDF + string similarity hybrid
+- ✅ **Comprehensive Testing**: All 9 MCP tools validated through full pipeline testing
+- ✅ **Improved Performance**: Optimized embedding generation and search algorithms
+- ✅ **Better Accuracy**: Search results now return relevant documents with proper scoring
 
 ### 📦 Installation
 1. Download the AtoRAG.dxt file below
@@ -95,12 +92,8 @@ gh release create "v$NEW_VERSION" ./AtoRAG.dxt \
 3. Go to Settings → Extensions  
 4. Drag and drop the .dxt file
 5. Click 'Install'
+6. Start adding documents and searching your knowledge base!
 
-### 📊 Stats
-- Package size: 8.8MB
-- Zero external dependencies
-- Uses Claude Desktop's built-in Node.js runtime
-- All data stored locally in ~/.atorag/knowledge_base/"
 
 print_success "🎉 Release v$NEW_VERSION created successfully!"
 print_success "📋 Check the release at: https://github.com/Atonomy-AI/AtoRAG/releases/tag/v$NEW_VERSION" 
