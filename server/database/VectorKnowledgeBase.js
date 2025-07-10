@@ -2,7 +2,7 @@ import initSqlJs from "sql.js";
 import fs from "fs";
 import path from "path";
 import { randomUUID } from "crypto";
-import { generateEmbedding, cosineSimilarity } from "../utils/embeddings.js";
+import { generateEmbedding, cosineSimilarity, enhancedSimilarity } from "../utils/embeddings.js";
 import { atoragPath, getBackupPath } from "../utils/paths.js";
 import { logger } from "../utils/logger.js";
 import { smartChunk, createChunkMetadata } from "../utils/chunking.js";
@@ -353,8 +353,6 @@ export class VectorKnowledgeBase {
 
   async searchDocuments(query, filters = {}, limit = 10) {
     try {
-      const queryEmbedding = await this.generateEmbedding(query);
-      
       // Build SQL query with filters - search both parent documents and chunks
       let sql = `
         SELECT d.*, GROUP_CONCAT(t.tag) as tags
@@ -388,8 +386,8 @@ export class VectorKnowledgeBase {
       stmt.bind(params);
       while (stmt.step()) {
         const doc = stmt.getAsObject();
-        const docEmbedding = JSON.parse(doc.embedding);
-        const similarity = cosineSimilarity(queryEmbedding, docEmbedding);
+        // Use enhanced similarity that combines TF-IDF and string similarity
+        const similarity = await enhancedSimilarity(query, doc.content);
         
         documents.push({
           ...doc,
